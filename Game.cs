@@ -76,8 +76,10 @@ namespace MathGame
             double answer = UserInputDouble();
             if(answer == x + y)
             {
+                Console.WriteLine("Correct!");
                 return 1;
             }
+            Console.WriteLine($"Incorrect, the correct answer is: {x + y}.");
             return 0;
         }
         public static int SubtractionProblem(double x, double y)
@@ -86,8 +88,10 @@ namespace MathGame
             double answer = UserInputDouble();
             if (answer == x - y)
             {
+                Console.WriteLine("Correct!");
                 return 1;
             }
+            Console.WriteLine($"Incorrect, the correct answer is: {x - y}.");
             return 0;
         }
         public static int MultiplicationProblem(double x, double y)
@@ -96,18 +100,22 @@ namespace MathGame
             double answer = UserInputDouble();
             if (answer == x * y)
             {
+                Console.WriteLine("Correct!");
                 return 1;
             }
+            Console.WriteLine($"Incorrect, the correct answer is: {x * y}.");
             return 0;
         }
         public static int DivisionProblem(double x, double y)
         {
             Console.WriteLine($"{x} / {y} = ? :");
             double answer = UserInputDouble();
-            if (answer == double. x / y)
+            if (answer == Math.Round((x / y), 2) || answer == Math.Round((x / y), 1))
             {
+                Console.WriteLine("Correct!");
                 return 1;
             }
+            Console.WriteLine($"Incorrect, the correct answer is: {x / y}.");
             return 0;
         }
         public static void GameRun(string selection, int num)
@@ -126,20 +134,37 @@ namespace MathGame
                         correct += AdditionProblem(x,y);
                         break;
                     case "2":
-                        correct += AdditionProblem(x, y);
+                        correct += SubtractionProblem(x, y);
                         break;
                     case "3":
-                        correct += AdditionProblem(x, y);
+                        correct += MultiplicationProblem(x, y);
                         break;
                     case "4":
-                        correct += AdditionProblem(x, y);
+                        correct += DivisionProblem(x, y);
                         break;
                     case "5":
+                        correct += AdditionProblem(x, y);
+                        x = rand.Next(1, 101);
+                        y = rand.Next(1, 101);
+                        i++;
+                        correct += SubtractionProblem(x, y);
+                        x = rand.Next(1, 101);
+                        y = rand.Next(1, 101);
+                        i++;
+                        correct += MultiplicationProblem(x, y);
+                        x = rand.Next(1, 101);
+                        y = rand.Next(1, 101);
+                        i++;
+                        correct += DivisionProblem(x, y);
+                        x = rand.Next(1, 101);
+                        y = rand.Next(1, 101);
                         break;
                     default:
                         throw new Exception("Invalid selection in game runtime");
                 }
             }
+
+            Console.WriteLine($"Game complete. You got {correct} out of {num} questions correct.");
         }
     }
 }
