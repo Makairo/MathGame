@@ -45,6 +45,10 @@ namespace MathGame
             }
             return output;
         }
+        public static double GetDouble()
+        {
+            return rand.Next(1, 20);
+        }
         public static void GameUI()
         {
             for ( ; ; ) {
@@ -115,7 +119,7 @@ namespace MathGame
                 Console.WriteLine("Correct!");
                 return 1;
             }
-            Console.WriteLine($"Incorrect, the correct answer is: {x / y}.");
+            Console.WriteLine($"Incorrect, the correct answer is: {Math.Round((x / y), 2)}.");
             return 0;
         }
         public static void GameRun(string selection, int num)
@@ -126,8 +130,8 @@ namespace MathGame
             int correct = 0;
             for (int i = 0; i < num; i++)
             {
-                x = rand.Next(1, 101);
-                y = rand.Next(1, 101);
+                x = GetDouble();
+                y = GetDouble();
                 switch (selection)
                 {
                     case "1":
@@ -144,20 +148,23 @@ namespace MathGame
                         break;
                     case "5":
                         correct += AdditionProblem(x, y);
-                        x = rand.Next(1, 101);
-                        y = rand.Next(1, 101);
+                        x = GetDouble();
+                        y = GetDouble();
                         i++;
+                        if (i == num) break;
                         correct += SubtractionProblem(x, y);
-                        x = rand.Next(1, 101);
-                        y = rand.Next(1, 101);
+                        x = GetDouble();
+                        y = GetDouble();
                         i++;
+                        if (i == num) break;
                         correct += MultiplicationProblem(x, y);
-                        x = rand.Next(1, 101);
-                        y = rand.Next(1, 101);
+                        x = GetDouble();
+                        y = GetDouble();
                         i++;
+                        if (i == num) break;
                         correct += DivisionProblem(x, y);
-                        x = rand.Next(1, 101);
-                        y = rand.Next(1, 101);
+                        x = GetDouble();
+                        y = GetDouble();
                         break;
                     default:
                         throw new Exception("Invalid selection in game runtime");
